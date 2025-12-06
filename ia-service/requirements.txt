@@ -1,0 +1,9 @@
+# --- API Framework ---
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+
+# --- Machine Learning & Image Processing ---
+# Dejamos que pip elija la última versión compatible
+tensorflow
+Pillow
