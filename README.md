@@ -57,7 +57,9 @@ dermoscan-ai/
 ├── ia-service/      # Microservicio de ML (Python)
 ├── api-gateway/     # Backend Manager (Java Spring Boot)
 ├── ui-client/       # Frontend (React + Vite)
-└── docker-compose.yml
+└── docker-compose.yml 
+``` 
 
----
+
 Desarrollado por Eduardo Ospino como proyecto de arquitectura de software.
+
