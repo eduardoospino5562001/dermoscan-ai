@@ -6,7 +6,7 @@ import ImageUploader from './components/ImageUploader';
 import ResultsDisplay from './components/ResultsDisplay';
 
 // URL del Backend (API Gateway en Java)
-const API_URL = 'http://localhost:8080/api/scan';
+const API_URL = 'http://127.0.0.1:8080/api/scan';
 
 function App() {
   // --- Estados de la Aplicación ---

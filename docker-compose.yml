@@ -1,0 +1,36 @@
+services:
+  # 1. Microservicio de IA
+  ia-service:
+    build: ./ia-service
+    container_name: dermoscan-ia
+    ports:
+      - "8000:8000"
+    networks:
+      - dermoscan-network
+
+  # 2. API Gateway (Java)
+  api-gateway:
+    build: ./api-gateway
+    container_name: dermoscan-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - IA_SERVICE_HOST=ia-service
+    depends_on:
+      - ia-service 
+    networks:
+      - dermoscan-network
+
+  # 3. Frontend (React)
+  ui-client:
+    build: ./ui-client
+    container_name: dermoscan-ui
+    ports:
+      - "5173:80" 
+    networks:
+      - dermoscan-network
+
+# Definición de la red para que se vean entre ellos
+networks:
+  dermoscan-network:
+    driver: bridge

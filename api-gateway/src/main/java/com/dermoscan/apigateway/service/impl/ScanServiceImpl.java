@@ -22,17 +22,17 @@ public class ScanServiceImpl implements ScanService {
     private final RestTemplate restTemplate;
 
     // URL del microservicio de IA.
-    private final String IA_SERVICE_URL = "http://localhost:8000/analyze";
+    private final String IA_SERVICE_URL = 
+        "http://" + 
+        (System.getenv("IA_SERVICE_HOST") != null ? System.getenv("IA_SERVICE_HOST") : "localhost") + 
+        ":8000/analyze";
 
     @Override
     public ScanResponse analyzeSkinImage(MultipartFile file) {
         try {
-            // 1. Preparar los headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-            // 2. Preparar el cuerpo de la petición (el archivo)
-            // Es necesario usar ByteArrayResource para preservar el nombre del archivo al re-enviarlo.
             ByteArrayResource fileResource = new ByteArrayResource(file.getBytes()) {
                 @Override
                 public String getFilename() {
@@ -43,11 +43,8 @@ public class ScanServiceImpl implements ScanService {
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("file", fileResource);
 
-            // 3. Empaquetar todo en una entidad HTTP
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            // 4. Hacer la llamada POST al servicio de Python
-            // restTemplate envía la petición y mapea automáticamente el JSON de respuesta a nuestra clase ScanResponse.
             return restTemplate.postForObject(IA_SERVICE_URL, requestEntity, ScanResponse.class);
 
         } catch (IOException e) {
