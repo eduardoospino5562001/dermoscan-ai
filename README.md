@@ -52,10 +52,11 @@ La aplicación está totalmente dockerizada para un despliegue sencillo.
 
 ## 📂 Estructura del Proyecto
 
+```bash
 dermoscan-ai/
-├── ia-service/ # Microservicio de ML (Python)
-├── api-gateway/ # Backend Manager (Java Spring Boot)
-├── ui-client/ # Frontend (React + Vite)
+├── ia-service/      # Microservicio de ML (Python)
+├── api-gateway/     # Backend Manager (Java Spring Boot)
+├── ui-client/       # Frontend (React + Vite)
 └── docker-compose.yml
 
 ---
